@@ -60,7 +60,7 @@ $(document).ready(function () {
         var formData = {
             email: $('#email').val(),
             twitter: $('#twitterHandle').val(),
-            image: "imageDataUrl"
+            image: imageDataUrl
         };
 
         $.ajax({
