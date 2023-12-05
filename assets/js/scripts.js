@@ -67,7 +67,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: 'https://script.google.com/macros/s/AKfycbyTBSZele7wYHYVKqPivUYIq1o8qBW_DFIzE-nzVaBq8iBchKMJG6Wg3H8dkqHD0oM/exec',
+            url: 'https://agoric-ugly-sweater.vercel.app/api/forward-to-sheet',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(formData),
