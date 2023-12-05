@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 module.exports = async (req, res) => {
     const response = await fetch('https://script.google.com/macros/s/AKfycbyTBSZele7wYHYVKqPivUYIq1o8qBW_DFIzE-nzVaBq8iBchKMJG6Wg3H8dkqHD0oM/exec', {
