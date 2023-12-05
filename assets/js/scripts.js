@@ -7,12 +7,6 @@ $(document).ready(function () {
         })
     }, 500);
 
-    function convertCanvasToImage() {
-        var canvas = document.getElementById('canvas');
-        var imageDataUrl = canvas.toDataURL('image/png'); // or 'image/jpeg'
-        return imageDataUrl;
-    }
-
     $("#btn-get-started").click(function () {
         $("#start-modal-wrapper").removeClass("animate__flipInX").addClass("animate__flipOutX");
         setTimeout(function () {
@@ -61,14 +55,17 @@ $(document).ready(function () {
 
     $('form').on('submit', function (e) {
         e.preventDefault();
+        var canvas = document.getElementById('canvas');
+        var imageDataUrl = canvas.toDataURL('image/png'); // or 'image/jpeg'
         var formData = {
             email: $('#email').val(),
             twitter: $('#twitterHandle').val(),
+            image: imageDataUrl
         };
 
         $.ajax({
-            url: 'https://agoric-ugly-sweater.vercel.app/api/forward-to-sheet',
             type: 'POST',
+            url: 'https://script.google.com/macros/s/AKfycbxXLi7-Q-1XA2L1DDGLjiO17XF-CHcmoiEP1HTxQLNOpa5X8TJyIZo9WxA6i1IALLLLzQ/exec',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {
