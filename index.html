@@ -5,15 +5,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agoric Ugly Sweater</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraft-3" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="./assets/css/custom.css">
 </head>
 
 <body>
-    <div id="video-container">
+    <div class="video-container">
         <video autoplay muted loop id="myVideo" poster="./assets/img/fallback_image.jpg">
             <source src="./assets/video/background-video.mp4" type="video/mp4">
         </video>
     </div>
+    <div class="page-container">
+        <div class="social-icons">
+            <a href="#"><img src="./assets/img/telegram.png" alt="Telegram"></a>
+            <a href="#"><img src="./assets/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="./assets/img/discord.png" alt="Discord"></a>
+        </div>
+
+        <div class="modals-wrapper">
+            <div class="start-modal-wrapper animate__animated animate__flipInX" id="start-modal-wrapper">
+                <div class="modal-content-header">
+                    <img src="./assets/img/start-modal-header1.png" alt="ugly-sweater" />
+                    <p>Ugly Sweater</p>
+                </div>
+                <div class="modal-content-body">
+                    <p>We’ve battled the harsh winter together, so it’s time to celebrate with the coziest item
+                        known to mankind...
+                        <br>
+                        <br>
+                        Anon.. are you ready to design your own ugly sweater?
+                    </p>
+                </div>
+                <div class="modal-content-footer">
+                    <button type="button" class="btn" id="btn-get-started">Get Started</button>
+                </div>
+            </div>
+
+            <div class="draw-modal-wrapper animate__animated animate__zoomIn" id="draw-modal-wrapper">
+                <div class="col">
+                    <div class="header text-center">
+                        <img src="./assets/img/start-modal-header1.png" alt="draw-modal-header-left" />
+                        <p>Design Sweater</p>
+                    </div>
+                    <div class="pixel-editor-wrapper">
+                        <canvas id="canvas" width="500px" height="500px"></canvas>
+
+                        <div class="swatch-container">
+                            <!-- <div class="swatch-color eraser" index=0>
+                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-75 -75 600 600"
+                                    style="enable-background:new 0 0 433.25 433.25;" xml:space="preserve">
+
+                                    <path
+                                        d="M418.4,192.331c19.8-19.8,19.8-51.9,0-71.7l-0.1-0.1l-78.6-78.3c-19.8-19.8-51.9-19.7-71.8,0l-169.5,169.6l-54.2,54.1
+									c-19.8,19.7-19.8,51.8-0.1,71.6l48.3,48.3H10c-5.5,0-10,4.5-10,10s4.5,10,10,10h297.4c5.5,0,10-4.5,10-10s-4.5-10-10-10H225
+									l23.9-23.7L418.4,192.331z M196.7,385.831h-76.1l-62.3-62.4c-12-12-11.9-31.4,0-43.4l47.1-47l122.2,122L196.7,385.831z
+			 						M119.6,218.931l162.5-162.5c12-12,31.5-12,43.5,0l78.6,78.4c12,12,12,31.4,0,43.5l-162.4,162.8L119.6,218.931z" />
+                                </svg>
+                            </div> -->
+                            <div class="swatch-color" index=1 title="Right click to change color"></div>
+                            <div class="swatch-color" index=2 title="Right click to change color"></div>
+                            <div class="swatch-color" index=3 title="Right click to change color"></div>
+                            <div class="swatch-color" index=4 title="Right click to change color"></div>
+                            <div class="swatch-color" index=5 title="Right click to change color"></div>
+                            <div class="swatch-color" index=6 title="Right click to change color"></div>
+                            <div class="swatch-color" index=7 title="Right click to change color"></div>
+
+                            <p class="info-text d-none">
+                                Right click to change color. <br>
+                                Cell(<span id="cell-index">0, 0</span>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col right-draw-pane">
+                    <div class="header text-center">
+                        <img src="./assets/img/start-modal-header1.png" alt="draw-modal-header-left" />
+                        <p>Submit Design</p>
+                    </div>
+                    <div class="description">
+                        <p>Once you’re happy with your cozy ugly sweater design, enter your email and twitter handle to
+                            make sure we can track your submission! Happy holidays &lt;3
+                        </p>
+                    </div>
+                    <form class="submit-design-form">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                placeholder="Email address">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="twitterHandle" placeholder="Twitter handle">
+                        </div>
+                        <button type="submit" class="btn btn-submit-design" id="btn-submit-design">Submit Design</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-controls">
+            <a data-bs-toggle="modal" data-bs-target="#termsofcondition">
+                <img src="./assets/img/termsofcondition.png" alt="terms-condition">
+                <span>Terms & Conditions</span>
+            </a>
+
+            <a data-bs-toggle="modal" data-bs-target="#whatisthis">
+                <img src="./assets/img/whatisthis.png" alt="terms-condition">
+                <span>What is this?</span>
+            </a>
+
+            <button class="btn" id="voice-control-btn">
+                <img src="./assets/img/voice-control.png" alt="voice-control" class="voice-control-btn-img">
+            </button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="termsofcondition" tabindex="-1" aria-labelledby="TermsOfConditionLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="./assets/img/toc-modal-background.png" class="img-fluid termsofcondition-background"
+                        alt="terms of conditions modal">
+                    <div class="modal-content-header">
+                        <img src="./assets/img/start-modal-header1.png" alt="start-modal-header">
+                        <p>Terms & Conditions</p>
+                    </div>
+                    <div class="modal-content-body">
+                        <p>Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br>
+                            <br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="whatisthis" tabindex="-1" aria-labelledby="WhatisThisLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="./assets/img/start-modal-background.png" class="img-fluid whatisthis-background"
+                        alt="what is this modal">
+                    <div class="modal-content-header">
+                        <img src="./assets/img/start-modal-header1.png" alt="start-modal-header">
+                        <p>What is this?</p>
+                    </div>
+                    <div class="modal-content-body">
+                        <p>We’ve battled the harsh winter together, so it’s time to celebrate with the coziest item
+                            known to mankind...
+                            <br><br>
+                            Anon.. are you ready to design your own ugly sweater?
+                        </p>
+                    </div>
+                    <div class="modal-content-footer">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-get-started">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+
+    <script src="./assets/js/gallery.js"></script>
+    <script src="./assets/js/util.js"></script>
+    <script src="./assets/js/main.js"></script>
     <script src="./assets/js/scripts.js"></script>
 </body>
 
