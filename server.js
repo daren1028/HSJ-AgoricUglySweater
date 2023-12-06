@@ -5,7 +5,7 @@ const { google } = require("googleapis");
 require('dotenv').config();
 
 const app = express();
-const port = 80;
+const port = 3000;
 
 // Set up Multer storage
 const storage = multer.diskStorage({
