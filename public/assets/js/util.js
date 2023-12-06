@@ -38,6 +38,15 @@ class Grid {
 		}
 	}
 
+	clear(ctx) {
+		for (var x = 0; x < this.row_count; x++) {
+			for (var y = 0; y < this.column_count; y++) {
+				var c = this.cells[x][y];
+				c.clear(ctx)
+			}
+		}
+	}
+
 	export() {
 		let arr = [];
 		for (var x = 0; x < this.row_count; x++) {
@@ -89,6 +98,15 @@ class Cell {
 		}
 	}
 
+	clear(ctx) {
+		ctx.fillStyle = "#fffffd";
+		ctx.fillRect(this.x + this.padding,
+			this.y + this.padding,
+			this.size - this.padding * 2,
+			this.size - this.padding * 2);
+		ctx.strokeStyle = "#e9edf6";
+		ctx.strokeRect(this.x, this.y, this.size, this.size);
+	}
 }
 
 class Swatch {
@@ -108,22 +126,22 @@ class Swatch {
 			});
 
 			// Change color event
-			l[i].addEventListener("contextmenu", (e) => {
-				e.preventDefault();
-				let _color = window
-					.prompt("Enter color hex code (e.g. #fcba03):");
+			// l[i].addEventListener("contextmenu", (e) => {
+			// 	e.preventDefault();
+			// 	let _color = window
+			// 		.prompt("Enter color hex code (e.g. #fcba03):");
 
-				if (!(/^#[0-9A-Fa-f]{6}$/i.test(_color) ||
-					/^#[0-9A-Fa-f]{3}$/i.test(_color))) {
-					window.alert("Invalid hex code given.")
-				}
-				else {
-					this.colors[i] = _color;
-					this.color = this.colors[i];
-					l[i].style.background = this.colors[i];
-				}
+			// 	if (!(/^#[0-9A-Fa-f]{6}$/i.test(_color) ||
+			// 		/^#[0-9A-Fa-f]{3}$/i.test(_color))) {
+			// 		window.alert("Invalid hex code given.")
+			// 	}
+			// 	else {
+			// 		this.colors[i] = _color;
+			// 		this.color = this.colors[i];
+			// 		l[i].style.background = this.colors[i];
+			// 	}
 
-			})
+			// })
 		}
 	}
 }

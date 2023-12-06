@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id"
         content="657416883280-7h3g43eftigjdq7lebjp7e6lrvcbvft2.apps.googleusercontent.com">
-    <title>Agoric Ugly Sweater</title>
+    <title>Ugly Sweaters - Agoric</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
     <link href="https://fonts.cdnfonts.com/css/minecraft-3" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,16 +16,25 @@
 </head>
 
 <body>
+    <audio id="audioElement" src="./assets/audio/bgAudio.mp3" autoplay loop>
+    </audio>
     <div class="video-container">
         <video autoplay muted loop id="myVideo" poster="./assets/img/fallback_image.jpg">
             <source src="./assets/video/background-video.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-container">
-        <div class="social-icons">
-            <a href="#"><img src="./assets/img/telegram.png" alt="Telegram"></a>
-            <a href="#"><img src="./assets/img/twitter.png" alt="Twitter"></a>
-            <a href="#"><img src="./assets/img/discord.png" alt="Discord"></a>
+        <div class="page-header">
+            <div class="logo-wrapper">
+                <a href="/">
+                    <img src="./assets/img/logo.svg" alt="logo" />
+                </a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="./assets/img/telegram.png" alt="Telegram"></a>
+                <a href="#"><img src="./assets/img/twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="./assets/img/discord.png" alt="Discord"></a>
+            </div>
         </div>
 
         <div class="modals-wrapper">
@@ -35,15 +44,10 @@
                     <p>Ugly Sweater</p>
                 </div>
                 <div class="modal-content-body">
-                    <p>We’ve battled the harsh winter together, so it’s time to celebrate with the coziest item
-                        known to mankind...
-                        <br>
-                        <br>
-                        Anon.. are you ready to design your own ugly sweater?
-                    </p>
+                    <p id="live-text"></p>
                 </div>
                 <div class="modal-content-footer">
-                    <button type="button" class="btn" id="btn-get-started">Get Started</button>
+                    <button type="button" class="btn" id="btn-get-started">Start Knitting</button>
                 </div>
             </div>
 
@@ -64,6 +68,10 @@
                             <div class="swatch-color" index=5 title="Right click to change color"></div>
                             <div class="swatch-color" index=6 title="Right click to change color"></div>
                             <div class="swatch-color" index=7 title="Right click to change color"></div>
+                            <div class="clear" id="swatch-clear"><img src="./assets/img/pixel-img-clear.svg"
+                                    alt="pixel-img-clear" /></div>
+                            <div class="download" id="swatch-download"><img src="./assets/img/pixel-img-download.svg"
+                                    alt="pixel-img-clear" /></div>
 
                             <p class="info-text d-none">
                                 Right click to change color. <br>
@@ -78,19 +86,31 @@
                         <p>Submit Design</p>
                     </div>
                     <div class="description">
-                        <p>Once you’re happy with your cozy ugly sweater design, enter your email and twitter handle to
-                            make sure we can track your submission! Happy holidays &lt;3
+                        <p>Once you’re happy with your ugly sweater design, enter your email and twitter handle to make
+                            sure we can track your submission! Happy holidays &lt;3
                         </p>
                     </div>
                     <form class="submit-design-form">
-                        <div class="mb-3">
+                        <div>
                             <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                                 placeholder="Email address">
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <input type="text" class="form-control" id="twitterHandle" placeholder="Twitter handle">
+                            <div class="error-message" id="twitterError">Please include the "@" symbol in your Twitter
+                                handle</div>
                         </div>
-                        <button type="submit" class="btn btn-submit-design" id="btn-submit-design">Submit
+
+                        <div class="custom-checkbox-wrapper">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="customCheckbox">
+                                <div class="check-mark"></div>
+                            </label>
+                            <label for="customCheckbox" class="customCheckbox-label">I agree to and acknowledge the<br>
+                                <a data-bs-toggle="modal" data-bs-target="#termsofcondition"><span>Terms &
+                                        Conditions</span></a></label>
+                        </div>
+                        <button type="button" class="btn btn-submit-design disabled" id="btn-submit-design">Submit
                             Design</button>
                     </form>
                 </div>
@@ -126,7 +146,7 @@
                 <span>What is this?</span>
             </a>
 
-            <button class="btn stop" id="voice-control-btn">
+            <button class="btn play" id="voice-control-btn">
                 <!-- <img src="./assets/img/voice-control.png" alt="voice-control" class="voice-control-btn-img"> -->
             </button>
         </div>
@@ -167,31 +187,31 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img src="./assets/img/start-modal-background.png" class="img-fluid whatisthis-background"
-                        alt="what is this modal">
+                    <img src="./assets/img/toc-modal-background.png" class="img-fluid whatisthis-background"
+                        alt="terms of conditions modal">
                     <div class="modal-content-header">
                         <img src="./assets/img/start-modal-header.png" alt="start-modal-header">
                         <p>What is this?</p>
                     </div>
                     <div class="modal-content-body">
-                        <p>We’ve battled the harsh winter together, so it’s time to celebrate with the coziest item
-                            known to mankind...
+                        <p>Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br>
+                            <br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
                             <br><br>
-                            Anon.. are you ready to design your own ugly sweater?
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
+                            <br><br>
+                            Here will be along text of terms & conditions to be provided by Santi in short time.
                         </p>
-                    </div>
-                    <div class="modal-content-footer">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-get-started">Get Started</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <audio id="audioElement" autoplay loop>
-        <source src="./assets/audio/bgAudio.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -201,7 +221,6 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
     <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-    <script src="./assets/js/gallery.js"></script>
     <script src="./assets/js/util.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/scripts.js"></script>
